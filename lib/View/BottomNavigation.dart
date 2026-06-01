@@ -6,6 +6,7 @@ import 'package:firebase/View/orders.dart';
 
 import 'package:firebase/View/bookings_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class Bottomnavigation extends StatefulWidget {
   const Bottomnavigation({super.key});
@@ -26,6 +27,7 @@ class BottomState extends State<Bottomnavigation> {
   @override
   void initState() {
     super.initState();
+    requestNotificationPermission();
 
     page = [
       Homepage(),
@@ -36,8 +38,19 @@ class BottomState extends State<Bottomnavigation> {
 
       AddOrder(),
       Products(),
+
     ];
   }
+  Future<void> requestNotificationPermission() async {
+  NotificationSettings settings =
+      await FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
+  print('Permission: ${settings.authorizationStatus}');
+}
 
   int indexValue = 0;
 

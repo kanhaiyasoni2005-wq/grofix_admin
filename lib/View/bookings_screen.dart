@@ -15,7 +15,10 @@ class AdminBookingsScreen extends StatelessWidget {
       appBar: AppBar(title: Text("All Bookings")),
 
       body: StreamBuilder<QuerySnapshot>(
-        stream: _firestore.collection('bookings').snapshots(),
+        stream: _firestore
+    .collection('bookings')
+    .orderBy('createdAt', descending: true)
+    .snapshots(),
 
         builder: (context, snapshot) {
 

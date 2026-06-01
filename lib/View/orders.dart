@@ -1,7 +1,9 @@
 import 'package:firebase/View/Orderdetails.dart';
 import 'package:firebase/ViewModel/orderprovider.dart';
+import 'package:firebase/model/firebase_token.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -32,7 +34,20 @@ class _HomepageState extends State<Homepage> {
       Provider.of<Orderprovider>(context, listen: false)
           .fetchAllOrders();
     });
+getToken();
+saveAdminToken();
+
   }
+  Future<void> getToken() async {
+  await Future.delayed(const Duration(seconds: 3));
+
+  try {
+    String? token = await FirebaseMessaging.instance.getToken();
+    print("TOKEN = $token");
+  } catch (e) {
+    print("ERROR = $e");
+  }
+}
 
   Color getStatusColor(String status) {
     switch (status.toLowerCase()) {
