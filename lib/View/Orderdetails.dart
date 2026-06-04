@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -129,14 +130,20 @@ class OrderDetailsScreen extends StatelessWidget {
             ...order.products.map<Widget>((item) {
               return Card(
                 child: ListTile(
-                  leading: Image.network(
-                    item['image'],
-                    width: 50,
-                    height: 50,
-                    errorBuilder: (context, error, stackTrace) {
-                      return const Icon(Icons.image);
-                    },
-                  ),
+                  leading: ClipRRect(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(2),
+          ),
+          child: CachedNetworkImage(
+            imageUrl: item['image'] ?? '',
+            fit: BoxFit.cover,
+            width: 50,
+            height: 50,
+            placeholder: (context, url) => SizedBox(),
+            errorWidget: (context, url, error) =>
+                Icon(Icons.broken_image),
+          ),
+        ),
                   title: Text(item['name'] ?? ""),
                   subtitle: Text("Qty: ${item['quantity']}"),
                   trailing: Text("₹ ${item['price']}"),

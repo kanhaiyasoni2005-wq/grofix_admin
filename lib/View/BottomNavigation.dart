@@ -1,6 +1,7 @@
 import 'package:firebase/View/add%20_order.dart';
 import 'package:firebase/View/banner.dart';
 import 'package:firebase/View/deletebanner.dart';
+import 'package:firebase/View/drower/drower.dart';
 import 'package:firebase/View/home_screnn.dart';
 import 'package:firebase/View/orders.dart';
 
@@ -57,6 +58,8 @@ class BottomState extends State<Bottomnavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+drawer: const AdminDrawer(),
+
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: indexValue,
         iconSize: 25,

@@ -1,9 +1,7 @@
 import 'package:firebase/View/BottomNavigation.dart';
+import 'package:firebase/View/splash/splashscreen.dart';
 import 'package:firebase/ViewModel/orderprovider.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-
 import 'package:firebase/ViewModel/products.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Bottomnavigation(),
+      home: splashScreen(),
     );
   }
 }

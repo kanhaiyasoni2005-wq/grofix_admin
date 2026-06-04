@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/View/Orderdetails.dart';
 import 'package:firebase/ViewModel/orderprovider.dart';
 import 'package:firebase/model/firebase_token.dart';
@@ -36,16 +37,30 @@ class _HomepageState extends State<Homepage> {
     });
 getToken();
 saveAdminToken();
+ listenTokenRefresh(); 
 
   }
   Future<void> getToken() async {
-  await Future.delayed(const Duration(seconds: 3));
-
   try {
     String? token = await FirebaseMessaging.instance.getToken();
-    print("TOKEN = $token");
+
+    print("TOKEN: $token");
+
+    if (token == null) {
+      print("Token is null");
+      return;
+    }
+
+    await FirebaseFirestore.instance
+        .collection("admin")
+        .doc("settings")
+        .set({
+      "token": token,
+    });
+
+    print("Token saved successfully");
   } catch (e) {
-    print("ERROR = $e");
+    print("Error getting/saving token: $e");
   }
 }
 

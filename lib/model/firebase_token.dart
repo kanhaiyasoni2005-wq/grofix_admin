@@ -15,3 +15,15 @@ Future<void> saveAdminToken() async {
     print("Token Saved: $token");
   }
 }
+void listenTokenRefresh() {
+  FirebaseMessaging.instance.onTokenRefresh.listen((newToken) async {
+    await FirebaseFirestore.instance
+        .collection('admin')
+        .doc('settings')
+        .set({
+      'token': newToken,
+    });
+
+    print("TOKEN UPDATED: $newToken");
+  });
+}

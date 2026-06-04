@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -56,12 +57,27 @@ class BookingDetailScreen extends StatelessWidget {
           // IMAGE
          Container(
   color: Colors.grey[200],
-  child: Image.network(
-    data['image'] ?? '',
-    height: 250,
-    width: double.infinity,
-    fit: BoxFit.contain,
-  ),
+  // child: Image.network(
+  //   data['image'] ?? '',
+  //   height: 250,
+  //   width: double.infinity,
+  //   fit: BoxFit.contain,
+  // ),
+  child: Expanded(
+        child: ClipRRect(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(12),
+          ),
+          child: CachedNetworkImage(
+            imageUrl: data['image'] ?? '',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            placeholder: (context, url) => SizedBox(),
+            errorWidget: (context, url, error) =>
+                Icon(Icons.broken_image),
+          ),
+        ),
+      ),
 ),
 
           const SizedBox(height: 10),

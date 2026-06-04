@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase/View/booking_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -63,21 +64,24 @@ class AdminBookingsScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: ListTile(
-
+        
                   // 🖼 IMAGE
                   leading: data['image'] != null &&
                           data['image'].toString().isNotEmpty
                       ? ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.network(
-                            data['image'],
-                            width: 50,
-                            height: 50,
-                            fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) =>
-                                Icon(Icons.broken_image),
-                          ),
-                        )
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(12),
+          ),
+          child: CachedNetworkImage(
+            imageUrl: data['image'] ?? '',
+            fit: BoxFit.cover,
+            width: 50,
+            height: 50,
+            placeholder: (context, url) => SizedBox(),
+            errorWidget: (context, url, error) =>
+                Icon(Icons.broken_image),
+          ),
+        )
                       : Icon(Icons.image),
 
                   // 🛠 SERVICE NAME

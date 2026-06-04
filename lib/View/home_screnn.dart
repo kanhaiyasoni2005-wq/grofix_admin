@@ -1,4 +1,5 @@
 import 'package:firebase/View/productUpdateScreen.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase/ViewModel/products.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,13 +54,20 @@ class _ProductsState extends State<Products> {
                     child: Column(
                       children: [
                         Expanded(
-                          child: Image.network(
-                            p.image,
-                            fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) =>
-                                Icon(Icons.image_not_supported),
-                          ),
-                        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(12),
+          ),
+          child: CachedNetworkImage(
+            imageUrl: p.image,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            placeholder: (context, url) => SizedBox(),
+            errorWidget: (context, url, error) =>
+                Icon(Icons.broken_image),
+          ),
+        ),
+      ),
                         Text(p.name),
                         Text("₹${p.price}"),
                       ],
