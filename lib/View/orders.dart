@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/View/Orderdetails.dart';
 import 'package:firebase/ViewModel/orderprovider.dart';
 import 'package:firebase/model/firebase_token.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -163,34 +164,27 @@ saveAdminToken();
                         ),
                       ),
 
-                      // 🔥 DROPDOWN
-                      SizedBox(
-                        width: 150,
-                        child: DropdownButton<String>(
-                          value: statusList.contains(currentStatus)
-                              ? currentStatus
-                              : "pending",
+                      // 🔥 accept button
+                     SizedBox(
+  width: 100,
+  child: ElevatedButton(
+    onPressed: () async {
 
-                          isExpanded: true,
-                          underline: const SizedBox(),
+  String uid =
+      FirebaseAuth.instance.currentUser!.uid;
 
-                          items: statusList.map((status) {
-                            return DropdownMenuItem<String>(
-                              value: status,
-                              child: Text(
-                                status.toUpperCase(),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            );
-                          }).toList(),
-
-                          onChanged: (value) {
-                            if (value != null) {
-                              vm.updateOrderStatus(order.id, value);
-                            }
-                          },
-                        ),
-                      ),
+  await FirebaseFirestore.instance
+      .collection("orders")
+      .doc(order.id)
+      .update({
+    "accepted": true,
+    "acceptedBy": uid,
+    "status": "order confirmed",
+  });
+},
+    child: const Text("Accept"),
+  ),
+),
                     ],
                   ),
                 ),

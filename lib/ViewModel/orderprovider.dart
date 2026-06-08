@@ -11,9 +11,11 @@ void fetchAllOrders() {
     // ✅ ADMIN VIEW - FETCH ALL ORDERS (NO USER FILTER)
     print("🔍 Fetching ALL orders (Admin View)");
 
-    FirebaseFirestore.instance
-        .collection("orders")
-        .orderBy("createdAt", descending: true) // ✅ Now orderBy works without where
+ 
+       FirebaseFirestore.instance
+    .collection("orders")
+    .where("accepted", isEqualTo: false)
+    .orderBy("createdAt", descending: true) // ✅ Now orderBy works without where
         .snapshots()
         .listen((snapshot) {
       orders = snapshot.docs.map((doc) {

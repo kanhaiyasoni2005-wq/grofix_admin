@@ -1,3 +1,4 @@
+import 'package:firebase/View/accept_order/acceptd_order.dart';
 import 'package:firebase/View/add%20_order.dart';
 import 'package:firebase/View/banner.dart';
 import 'package:firebase/View/deletebanner.dart';
@@ -37,8 +38,8 @@ class BottomState extends State<Bottomnavigation> {
       // 🔥 PASS USER ID HERE
       AdminBookingsScreen(),
 
-      AddOrder(),
-      Products(),
+      AcceptedOrdersScreen(),
+      
 
     ];
   }
@@ -81,9 +82,7 @@ drawer: const AdminDrawer(),
               icon: Icon(Icons.add, color: Colors.black),
               label: "Add"),
 
-              BottomNavigationBarItem(
-              icon: Icon(Icons.production_quantity_limits_rounded, color: Colors.black),
-              label: "products"),
+              
         ],
       ),
 

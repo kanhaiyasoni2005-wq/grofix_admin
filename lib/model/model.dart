@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OrderModel {
   String id;
+  final String? acceptedBy;
   String userId;
   List products;
   double totalPrice;
@@ -15,6 +16,7 @@ class OrderModel {
   double longitude;
 
   OrderModel({
+    this.acceptedBy,
     required this.id,
     required this.userId,
     required this.products,
@@ -55,6 +57,7 @@ class OrderModel {
 
     return OrderModel(
       id: id,
+      acceptedBy: data['acceptedBy']?.toString(),
       userId: data['userId'] ?? "",
       products: products,
       totalPrice: (data['totalPrice'] ?? 0).toDouble(),
