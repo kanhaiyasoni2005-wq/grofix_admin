@@ -1,9 +1,7 @@
 import 'package:firebase/View/accept_order/acceptd_order.dart';
-import 'package:firebase/View/add%20_order.dart';
 import 'package:firebase/View/banner.dart';
 import 'package:firebase/View/deletebanner.dart';
 import 'package:firebase/View/drower/drower.dart';
-import 'package:firebase/View/home_screnn.dart';
 import 'package:firebase/View/orders.dart';
 
 import 'package:firebase/View/bookings_screen.dart';
@@ -79,8 +77,8 @@ drawer: const AdminDrawer(),
               label: "Bookings"),
 
           BottomNavigationBarItem(
-              icon: Icon(Icons.add, color: Colors.black),
-              label: "Add"),
+              icon: Icon(Icons.post_add_rounded, color: Colors.black),
+              label: "orders"),
 
               
         ],
@@ -88,31 +86,7 @@ drawer: const AdminDrawer(),
 
       body: page[indexValue],
       appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AddBannerScreen()),
-              );
-              // 🔥 LOG OUT FUNCTIONALITY
-            },
-            icon: Icon(Icons.image, color: Colors.black),
-          ),
-           Padding(
-             padding: const EdgeInsets.all(9.0),
-             child: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const BannerListScreen()),
-                );
-                // 🔥 LOG OUT FUNCTIONALITY
-              },
-              icon: Icon(Icons.delete, color: Colors.black),
-                       ),
-           )
-        ],
+        
       ),
     );
   }
