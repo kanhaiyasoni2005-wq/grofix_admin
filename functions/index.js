@@ -45,3 +45,94 @@ exports.sendOrderNotification = onDocumentCreated(
     }
   }
 );
+
+const { onDocumentUpdated } =
+require("firebase-functions/v2/firestore");
+
+exports.sendUserStatusNotification =
+onDocumentUpdated(
+"orders/{orderId}",
+
+async (event) => {
+
+try {
+
+const before =
+event.data.before.data();
+
+const after =
+event.data.after.data();
+
+if (
+before.status ===
+after.status
+) {
+return;
+}
+
+const userId =
+after.userId;
+
+if (!userId) {
+return;
+}
+
+const db =
+admin.firestore();
+
+const userDoc =
+await db
+.collection("users")
+.doc(userId)
+.get();
+
+if (!userDoc.exists) {
+return;
+}
+
+const token =
+userDoc.data().fcmToken;
+
+if (!token) {
+return;
+}
+
+await admin.messaging().send({
+
+token: token,
+
+notification: {
+
+title:
+"Order Update",
+
+body:
+`Status: ${after.status}`,
+
+},
+
+android: {
+
+priority:
+"high",
+
+notification: {
+sound:
+"default",
+},
+
+},
+
+});
+
+console.log(
+"User notification sent"
+);
+
+} catch (e) {
+
+console.error(e);
+
+}
+
+});

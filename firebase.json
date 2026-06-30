@@ -1,16 +1,1 @@
-{
-  "functions": [
-    {
-      "source": "functions",
-      "codebase": "default",
-      "disallowLegacyRuntimeConfig": true,
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log",
-        "*.local"
-      ]
-    }
-  ]
-}
+{"functions":[{"source":"functions","codebase":"default","disallowLegacyRuntimeConfig":true,"ignore":["node_modules",".git","firebase-debug.log","firebase-debug.*.log","*.local"]}],"flutter":{"platforms":{"android":{"default":{"projectId":"whatsapp-97b8c","appId":"1:717672718438:android:6c4530ca32782d015ecda7","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"whatsapp-97b8c","configurations":{"android":"1:717672718438:android:6c4530ca32782d015ecda7","ios":"1:717672718438:ios:c686d5ae171287585ecda7","macos":"1:717672718438:ios:c686d5ae171287585ecda7","web":"1:717672718438:web:aa86f7923f9d2ff75ecda7","windows":"1:717672718438:web:479103fc63740dfd5ecda7"}}}}}}

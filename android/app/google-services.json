@@ -7,22 +7,38 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:717672718438:android:e29c0ecca17f9b065ecda7",
+        "mobilesdk_app_id": "1:717672718438:android:aaf47917a6629b175ecda7",
         "android_client_info": {
-          "package_name": "com.example.blinkit"
+          "package_name": "com.aethon.grofix"
         }
       },
       "oauth_client": [
         {
-          "client_id": "717672718438-l7n38hmid3tv5rpmafhnve1r6vm8r4v6.apps.googleusercontent.com",
+          "client_id": "717672718438-atnr8s65ibtk3mfb7q4bpsat2vogf1ia.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.blinkit",
+            "package_name": "com.aethon.grofix",
+            "certificate_hash": "5f8cdca73562bf032dd147467231be6ff43dbb6b"
+          }
+        },
+        {
+          "client_id": "717672718438-ntuqdn9atm82t3kpntkp6snviq20gh7r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aethon.grofix",
             "certificate_hash": "76baccdce8e71bcaecb06e405b4cb46fcb985aac"
           }
         },
         {
-          "client_id": "717672718438-96tk2ng4rpevrfg3ah99ehn9e2khlng6.apps.googleusercontent.com",
+          "client_id": "717672718438-t5upjc74kd9hdevq1vitcok01sgfvmus.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aethon.grofix",
+            "certificate_hash": "75c5020cab5ec380f3a48cc77a7d264c67bfb93f"
+          }
+        },
+        {
+          "client_id": "717672718438-srthje0ddnb26rvvcjiiai8mmrm9dl0r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -37,6 +53,13 @@
             {
               "client_id": "717672718438-96tk2ng4rpevrfg3ah99ehn9e2khlng6.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "717672718438-efvfk2j677og2m84dlsdvjvl48ootmm8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.practice"
+              }
             }
           ]
         }
@@ -51,7 +74,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "717672718438-96tk2ng4rpevrfg3ah99ehn9e2khlng6.apps.googleusercontent.com",
+          "client_id": "717672718438-trnji3s4mcipmr1k0oc2kildkvllf3lk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firebase",
+            "certificate_hash": "76baccdce8e71bcaecb06e405b4cb46fcb985aac"
+          }
+        },
+        {
+          "client_id": "717672718438-srthje0ddnb26rvvcjiiai8mmrm9dl0r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -66,6 +97,49 @@
             {
               "client_id": "717672718438-96tk2ng4rpevrfg3ah99ehn9e2khlng6.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "717672718438-efvfk2j677og2m84dlsdvjvl48ootmm8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.practice"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717672718438:android:9e34f04b0a62cfe35ecda7",
+        "android_client_info": {
+          "package_name": "com.example.practice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717672718438-srthje0ddnb26rvvcjiiai8mmrm9dl0r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFPH6l4GHd2AkQErHEMnOc4d-PkZ6Ps8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717672718438-96tk2ng4rpevrfg3ah99ehn9e2khlng6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "717672718438-efvfk2j677og2m84dlsdvjvl48ootmm8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.practice"
+              }
             }
           ]
         }

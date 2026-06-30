@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/View/BottomNavigation.dart';
 import 'package:firebase/View/LoginPage/loginscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -65,25 +65,84 @@ class _splashScreen extends State<splashScreen> {
   }
 
   // 🔹 Login check
-  void checkLogin() async {
-    await Future.delayed(const Duration(milliseconds: 1500)); // 🔥 simulate loading
+
+
+void checkLogin() async {
+  await Future.delayed(
+    const Duration(milliseconds: 1500),
+  );
+
+  if (!mounted) return;
+
+  User? user = FirebaseAuth.instance.currentUser;
+
+  if (user == null) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const Loginscreen(),
+      ),
+    );
+    return;
+  }
+
+  final snap = await FirebaseFirestore.instance
+      .collection('staff') // users → staff
+      .doc(user.uid)
+      .get();
+
+  if (!snap.exists) {
+    await FirebaseAuth.instance.signOut();
 
     if (!mounted) return;
 
-    User? user = FirebaseAuth.instance.currentUser;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const Loginscreen(),
+      ),
+    );
 
-    if (user != null) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Bottomnavigation()),
-      );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Loginscreen()),
-      );
-    }
+    return;
   }
+
+  bool blocked =
+      snap.data()?['blocked'] ?? false;
+
+  String status =
+      snap.data()?['status'] ?? '';
+
+  if (blocked || status != 'approved') {
+    await FirebaseAuth.instance.signOut();
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          "Access Denied",
+        ),
+      ),
+    );
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const Loginscreen(),
+      ),
+    );
+
+    return;
+  }
+
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (_) =>
+          const Bottomnavigation(),
+    ),
+  );
+}
 
   // 🔹 Retry button
   void retry() {
