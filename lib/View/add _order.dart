@@ -1,4 +1,5 @@
 import 'package:firebase/ViewModel/orderprovider.dart';
+import 'package:firebase/barcode/barcode_scanner.dart';
 // import 'package:firebase/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,22 @@ class AddOrder extends StatefulWidget {
 
 class _AddOrderState extends State<AddOrder> {
   String selectedCategory = "vegetables";
+  Future<void> scanBarcode() async {
+
+  String? barcode =
+      await Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) =>
+          const BarcodeScreen(),
+    ),
+  );
+
+  if (barcode != null) {
+    productIdController.text =
+        barcode;
+  }
+}
 
   List<String> categories = [
     "vegetables",
@@ -25,6 +42,8 @@ class _AddOrderState extends State<AddOrder> {
     "clothes",
     "beverages",
   ];
+  TextEditingController productIdController =
+    TextEditingController();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController DescController = TextEditingController();
@@ -35,6 +54,7 @@ class _AddOrderState extends State<AddOrder> {
 
   @override
   void dispose() {
+    productIdController.dispose();
     nameController.dispose();
     DescController.dispose();
     priceController.dispose();
@@ -68,6 +88,20 @@ class _AddOrderState extends State<AddOrder> {
                     hintText: "Product Name",
                   ),
                 ),
+                const SizedBox(height: 12),
+                TextField(
+  controller: productIdController,
+  keyboardType: TextInputType.number,
+  decoration: InputDecoration(
+    hintText: "Product ID",
+    suffixIcon: IconButton(
+      onPressed: scanBarcode,
+      icon: Icon(Icons.qr_code_scanner),
+    ),
+  ),
+),
+
+const SizedBox(height: 12),
 
                 const SizedBox(height: 12),
 
@@ -137,13 +171,14 @@ class _AddOrderState extends State<AddOrder> {
                   onPressed: () async {
 
                     await vm.addProduct(
-                      catagory: selectedCategory,
-                      name: nameController.text,
-                      Description: DescController.text,
-                      price: priceController.text,
-                      image: imageController.text,
-                      stock: stockController.text,
-                    );
+  productId: productIdController.text,
+  catagory: selectedCategory,
+  name: nameController.text,
+  Description: DescController.text,
+  price: priceController.text,
+  image: imageController.text,
+  stock: stockController.text,
+);
 
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Product Added")),

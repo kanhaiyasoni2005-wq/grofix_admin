@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/model/model.dart';
 import 'package:flutter/material.dart';
@@ -42,24 +44,43 @@ Future<void> updateOrderStatus(String orderId, String status) async {
     "deliveredTime": FieldValue.serverTimestamp(),
 });
 }
-Future<void> addProduct({
-  required String stock,
 
+
+
+
+
+
+Future<void> addProduct({
+  String? productId,
+  required String stock,
   required String catagory,
   required String name,
   required String price,
   required String Description,
   required String image,
 }) async {
-  await FirebaseFirestore.instance.collection("User").add({
+
+  // ID empty ho to generate karo
+  if (productId == null ||
+      productId.trim().isEmpty) {
+
+    productId =
+"${DateTime.now().millisecondsSinceEpoch}${Random().nextInt(999)}";
+  }
+
+  await FirebaseFirestore.instance
+      .collection("User")
+      .doc(productId) // ab empty nahi hogi
+      .set({
+
+    "productId": productId,
     "name": name,
-   
     "catagory": catagory,
-     "Description": Description,
+    "Description": Description,
     "price": double.tryParse(price) ?? 0,
     "image": image,
-    "createdAt": DateTime.now(),
     "stock": int.tryParse(stock) ?? 0,
+    "createdAt": FieldValue.serverTimestamp(),
   });
 }
 }
